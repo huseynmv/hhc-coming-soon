@@ -873,6 +873,83 @@
         .footer-social a:hover {
             opacity: 0.7;
         }
+        /* --- Large tablets / small laptops --- */
+@media (max-width: 1200px) {
+  /* Cards & CTA share the same left start */
+  .cards-section { padding: 32px 24px 64px 24px; }
+  .cards-section .design-img { left: 24px; }
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 per row */
+    gap: 12px;
+  }
+
+  .contact-cta {
+    grid-template-columns: 1fr;    /* stack */
+    gap: 20px;
+    padding: 0 24px;
+    margin: 40px 0 64px;
+  }
+
+  .cta-left { padding: 32px; }
+  .cta-left h2 { font-size: 36px; }
+
+  .phone-row { grid-template-columns: 1fr; }
+}
+
+/* --- Tablets / large phones --- */
+@media (max-width: 768px) {
+  /* Hero */
+  section.hero { height: auto; min-height: 60vh; }
+  .hero_content { padding: 24px 16px; }
+  .hero_content img { max-width: 150px; }
+  .hero_content h1 { font-size: 48px !important; line-height: 120% !important; }
+
+  /* Hero notify form → stacked */
+  .notify-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .notify-form input { width: 100% !important; }
+  .notify-form button { width: 100%; }
+
+  /* Cards */
+  .cards-section { padding: 24px 16px 56px 16px; }
+  .cards-section .design-img { left: 16px; margin-top: 280px; } /* tweak if needed */
+  .card-grid {
+    grid-template-columns: 1fr;    /* 1 per row */
+    gap: 12px;
+  }
+  .card { border-radius: 10px; }   /* softer corners on small */
+
+  /* Stars / copy */
+  .form-section { padding: 0 16px; }
+  .form-section p { font-size: 16px; }
+
+  /* CTA form */
+  .contact-cta { padding: 0 16px; }
+  .cta-form-row { grid-template-columns: 1fr; }
+  .code-block { grid-template-columns: 56px 1fr; }
+  .send-wrap { justify-content: stretch; }
+  .cta-btn { width: 100%; justify-content: center; }
+
+  /* Footer */
+  .footer { padding: 16px; flex-direction: column; gap: 12px; align-items: flex-start; }
+}
+
+/* --- Small phones --- */
+@media (max-width: 480px) {
+  .hero_content h1 { font-size: 36px !important; }
+  .contact-options { gap: 8px; }
+  .contact-options button { width: 100%; }
+
+  /* Tighten the name pill position on cards */
+  .card .name { top: 8px; left: 8px; }
+  .card .title { left: 10px; bottom: 10px; font-size: 16px; }
+
+  .cta-left h2 { font-size: 28px; }
+}
     </style>
 </head>
 
