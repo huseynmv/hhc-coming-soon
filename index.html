@@ -461,6 +461,7 @@
         .container {
             width: 100%;
             min-height: 100vh;
+            overflow: hidden;
         }
 
         /* === Hero Section === */
@@ -589,7 +590,7 @@
             position: relative;
             width: 100%;
             /* full width section */
-            padding: 40px 70px 80px 70px;
+            padding: 32px 70px 32px 70px;
             /* only left padding */
         }
 
@@ -620,18 +621,24 @@
             display: block;
         }
 
-        .card::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 50%;
-            background: linear-gradient(to top, #7373731A 0%, #E4E4E400 100%);
-            backdrop-filter: blur(2px);
-            pointer-events: none;
-            z-index: 1;
-        }
+.card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(to top, #7373731A 0%, #E4E4E400 100%);
+  backdrop-filter: blur(2px);
+  pointer-events: none;
+  z-index: 1;
+  transition: backdrop-filter 0.3s ease, background 0.3s ease;
+}
+
+.card:hover::after {
+  backdrop-filter: blur(0); /* remove blur */
+  background: linear-gradient(to top, rgba(115,115,115,0) 0%, rgba(228,228,228,0) 100%);
+}
 
 
         .card .name {
@@ -678,9 +685,9 @@
         .contact-cta {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
-            gap: 24px;
+            gap: 16px;
             align-items: stretch;
-            margin: 56px 0 80px;
+            margin: 70px 0 32px;
             padding: 0 70px;
             /* align with cards */
         }
@@ -688,8 +695,8 @@
         .cta-left {
             background: #1D4B4A;
             color: #fff;
-            border-radius: 16px;
-            padding: 40px 48px;
+            border-radius: 12px;
+            padding: 103px 32px;
             position: relative;
             overflow: hidden;
         }
@@ -703,7 +710,7 @@
         }
 
         .cta-left h2 {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Onest', sans-serif;
             font-weight: 700;
             font-size: 42px;
             line-height: 120%;
@@ -712,8 +719,8 @@
 
         .cta-right {
             background: #f8f8f8;
-            border-radius: 16px;
-            padding: 24px;
+            border-radius: 12px;
+            padding: 82px 32px;
         }
 
         .cta-form-row {
@@ -1120,8 +1127,8 @@
         <!-- STARS / COPY SECTION -->
         <section class="form-section">
             <img src="./assets/images/stars.png" alt="Stars">
-            <p>More Than Just a Booking System</p>
-            <p>Halalholidaycheck is not only a reservation system; with its digital infrastructure, multi-service
+            <p style="font-size: 32px; font-weight: 600; line-height: 147%; font-family: Onest; margin-top: 16px;">More Than Just a Booking System</p>
+            <p style="font-size: 12px; font-weight: 500; line-height: 147%; font-family: Onest; margin-top: 16px;">Halalholidaycheck is not only a reservation system; with its digital infrastructure, multi-service
                 management, and <br> user experience–focused approach, it is a tourism technologies platform that
                 connects business partners and <br> end-users in the travel industry.</p>
         </section>
@@ -1175,9 +1182,9 @@
 
         <!-- FOOTER -->
         <footer class="footer">
-            <div class="footer-left">
+            <p class="footer-left" style="font-size: 14px; font-weight: 600; font-family: Montserrant;">
                 © 2025 HalalHolidayCheck. All rights reserved.
-            </div>
+            </p>
             <div class="footer-right">
                 <div class="footer-lang"><span>🇬🇧</span> En</div>
                 <div class="footer-currency"><span>💱</span> USD</div>
