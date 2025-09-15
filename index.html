@@ -959,6 +959,68 @@
   .cta-left h2 { font-size: 28px; }
 }
     </style>
+    <style>
+      /* Hero: top-right language + socials */
+.hero-top-right{
+  position:absolute;
+  top:35px;            /* 35px from top */
+  right:30px;          /* 30px from right */
+  display:flex;
+  align-items:center;
+  gap:16px;            /* 16px between lang and socials */
+  z-index:2;           /* above overlay & content */
+} 
+
+.lang-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;             /* 4px between flag and "En" */
+  padding:6px 10px;
+  /* background:#fff; */
+  border-radius:999px;
+  font-size:12px;
+  font-weight:600;
+  color:"#fff";
+  font-family:'Onest', sans-serif;
+  line-height:1;
+  /* box-shadow:0 1px 2px rgba(0,0,0,.08); */
+}
+
+.hero-social{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;            /* 10px between instagram and facebook */
+}
+
+.hero-social a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:32px;
+  height:32px;
+  /* border-radius:50%; */
+  /* background:#fff; */
+  color:#222;
+  text-decoration:none;
+  font-size:16px;
+  box-shadow:0 1px 2px rgba(0,0,0,.08);
+  transition:opacity .2s, transform .08s;
+}
+
+.hero-social a:hover{ opacity:.9; }
+.hero-social a:active{ transform:translateY(1px); }
+
+/* Responsiveness: keep offsets, scale down badges on smaller screens */
+@media (max-width: 768px){
+  .lang-pill{ padding:5px 8px; font-size:11px; }
+  .hero-social a{ width:28px; height:28px; font-size:14px; }
+}
+
+@media (max-width: 480px){
+  .lang-pill{ padding:4px 8px; font-size:10.5px; }
+  .hero-social a{ width:26px; height:26px; font-size:13px; }
+}
+    </style>
 </head>
 
 <body>
@@ -967,6 +1029,23 @@
         <section class="hero">
             <img src="./assets/images/hero.jpg" class="hero_img" alt="">
             <div class="overlay"></div>
+            <!-- Top-right language + socials -->
+<div class="hero-top-right">
+  <div class="lang-pill" aria-label="Language">
+        <span class="flag">🇬🇧</span><span style="  font-weight: 500;
+      font-size: 12px;
+      font-family: Onest; color: #fff;" class="code">En</span>
+  </div>
+
+  <div class="hero-social" aria-label="Social links">
+    <a href="https://www.instagram.com/halalholidaycheck/?igsh=MWhzaDE3Z3JseHlqbg%3D%3D#" target="_blank" rel="noopener" aria-label="Instagram">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+    <a href="https://www.facebook.com/share/16vHEvEckk/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">
+      <i class="fa-brands fa-facebook-f"></i>
+    </a>
+  </div>
+</div>
             <div class="hero_content">
                 <img src="./assets/images/logo.png" alt="Logo">
                 <h1 style="font-size: 80px; font-weight: 600; line-height: 129%;">We’re Coming Soon</h1>
