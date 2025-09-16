@@ -203,3 +203,24 @@ document.addEventListener("DOMContentLoaded", function () {
     if(saved !== 'en'){ applyLanguage(saved); }
   });
 })();
+// ====== Contact Success Modal open/close ======
+(function(){
+  const modal = document.getElementById('contact-success-modal');
+  if (!modal) return;
+
+  function openModal(){ modal.setAttribute('aria-hidden','false'); }
+  function closeModal(){ modal.setAttribute('aria-hidden','true'); }
+
+  // Close when clicking backdrop or the button
+  document.addEventListener('click', (e)=>{
+    if (e.target.closest('[data-close]')) {
+      e.preventDefault();
+      closeModal();
+    }
+  });
+
+  // If PHP set aria-hidden="false", it’s already open after redirect.
+  // Nothing else to do. This block exists so you can also open it programmatically:
+  window.HHC_OPEN_SUCCESS = openModal;
+  window.HHC_CLOSE_SUCCESS = closeModal;
+})();

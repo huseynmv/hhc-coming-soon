@@ -1,18 +1,24 @@
 <?php
-require __DIR__ . '/includes/bootstrap.php';
-require __DIR__ . '/includes/handlers.php';  
+require __DIR__ . '/includes/bootstrap.php';   // session + output buffering
+require __DIR__ . '/includes/handlers.php';    // handles POST (notify/contact), redirects, flashes
 
+$status = $_SESSION['flash_sent'] ?? null;                 // 'ok' or 'fail'
+$show_contact_modal = in_array($status, ['ok','fail'], true);
+$contact_success = ($status === 'ok');
+unset($_SESSION['flash_sent']);
+// Define asset base path INSIDE PHP (unchanged logic for images)
 $ASSET = BASEURL . 'assets/public/img/';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-TWKD8DRZ');</script>
-
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TWKD8DRZ');</script>
+<!-- End Google Tag Manager -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Halal Holiday Check</title>
@@ -26,16 +32,18 @@ $ASSET = BASEURL . 'assets/public/img/';
   <link rel="icon" type="image/png" sizes="32x32" href="<?= $ASSET ?>favicon.png">
   <link rel="shortcut icon" href="<?= $ASSET ?>favicon.png" type="image/png">
 
+  <!-- External CSS (moved all <style> blocks here) -->
   <link rel="stylesheet" href="<?= BASEURL ?>assets/public/css/main.css">
 </head>
 <body>
-  <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TWKD8DRZ" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-  </noscript>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TWKD8DRZ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
   <?php if (!empty($_SESSION['flash_sent'])): ?>
     <div id="flash-message" style="background:#d4edda;color:#155724;padding:12px;text-align:center;font-weight:600;">
-      <?= $_SESSION['flash_sent'] === "ok" ? "✅ Your message has been sent successfully!" : "❌ There was a problem sending your message. Please try again." ?>
+      <?= $_SESSION['flash_sent'] === "ok" ? "âœ… Your message has been sent successfully!" : "â?Œ There was a problem sending your message. Please try again." ?>
     </div>
     <?php unset($_SESSION['flash_sent']); ?>
   <?php endif; ?>
@@ -48,7 +56,7 @@ $ASSET = BASEURL . 'assets/public/img/';
 
       <div class="hero-top-right notranslate">
         <div class="lang-pill notranslate" style="font-weight: 500; font-size: 12px; font-family: Onest; color: #fff;" aria-label="Language">
-          <span class="flag notranslate">🇬🇧</span>
+          <span class="flag notranslate">ðŸ‡¬ðŸ‡§</span>
           <span class="code notranslate" style="font-weight: 500; font-size: 12px; font-family: Onest; color: #fff;">En</span>
         </div>
         <div class="hero-social" aria-label="Social links">
@@ -63,19 +71,11 @@ $ASSET = BASEURL . 'assets/public/img/';
 
       <div class="hero_content">
         <img src="<?= $ASSET ?>logo(1).png" alt="Logo">
-        <h1 style="font-size: 80px; font-weight: 600; line-height: 129%;">We’re Coming Soon</h1>
+        <h1 style="font-size: 80px; font-weight: 600; line-height: 129%;">Weâ€™re Coming Soon</h1>
         <p style="font-weight: 500; font-size: 12px; margin-top: 16px; line-height: 147%;">We're working hard
-          behind the scenes to bring you a new experience. Stay tuned and <br>be the first to explore what’s next!</p>
+          behind the scenes to bring you a new experience. Stay tuned and <br>be the first to explore whatâ€™s next!</p>
 
-        <form class="notify-form" action="" method="POST">
-          <input type="hidden" name="form_id" value="notify">
-          <input type="email" name="email" placeholder="Please enter your email address" required
-                 style="height: 44px; width: 552px; border: 1px solid #F2F2F2; border-radius: 12px;">
-          <button type="submit"
-                  style="border-radius: 12px; background-color: #266462; font-size: 14px; font-weight: 600; font-family: Montserrat; padding-left: 16px; padding-right: 16px;">
-            Notify me
-          </button>
-        </form>
+        
 
         <?php if (!empty($_SESSION['flash_notify'])): ?>
           <div id="flash-notify"
@@ -85,13 +85,13 @@ $ASSET = BASEURL . 'assets/public/img/';
                           ? 'background:#E8F6F2; color:#0b6b61; border:1px solid #c9e5e1;'
                           : 'background:#FFF3F3; color:#a33; border:1px solid #f3d0d0;' ?>">
             <?= $_SESSION['flash_notify']==='ok'
-                ? '✅ Thanks! We\'ll let you know when we launch.'
-                : '❌ Please enter a valid email and try again.' ?>
+                ? 'âœ… Thanks! We\'ll let you know when we launch.'
+                : 'â?Œ Please enter a valid email and try again.' ?>
           </div>
           <?php unset($_SESSION['flash_notify']); ?>
         <?php endif; ?>
 
-        <p style="font-size: 12px; font-weight: 500; font-family: Onest; margin-top: 16px;">*Notify me when website is launched <br> or</p>
+
 
         <div class="contact-options">
           <a href="tel:4441075" class="call-btn">Call us</a>
@@ -108,48 +108,48 @@ $ASSET = BASEURL . 'assets/public/img/';
     <div id="lang-modal" class="lang-modal" aria-hidden="true">
       <div class="lang-backdrop" data-close></div>
       <div class="lang-dialog" role="dialog" aria-modal="true" aria-labelledby="lang-title">
-        <button class="lang-close" type="button" data-close aria-label="Close">×</button>
+        <button class="lang-close" type="button" data-close aria-label="Close">Ã—</button>
         <h3 id="lang-title">Choose your language</h3>
 
         <div class="lang-grid">
-          <button class="lang-item notranslate" data-lang="af">Afrikaans — Suid-Afrika</button>
-          <button class="lang-item notranslate" data-lang="sq">Albanian — Shqipëri</button>
-          <button class="lang-item notranslate" data-lang="ar">Arabic — مصر</button>
-          <button class="lang-item notranslate" data-lang="az">Azərbaycan dili — Azərbaycan</button>
-          <button class="lang-item notranslate" data-lang="eu">Basque — Euskal Herria</button>
-          <button class="lang-item notranslate" data-lang="bn">Bengali — বাংলাদেশ</button>
-          <button class="lang-item notranslate" data-lang="bg">Bulgarian — България</button>
-          <button class="lang-item notranslate" data-lang="ca">Catalan — Catalunya</button>
-          <button class="lang-item notranslate" data-lang="zh-CN">Chinese — 中国</button>
-          <button class="lang-item notranslate" data-lang="hr">Croatian — Hrvatska</button>
-          <button class="lang-item notranslate" data-lang="cs">Czech — Česká republika</button>
-          <button class="lang-item notranslate" data-lang="da">Danish — Danmark</button>
-          <button class="lang-item notranslate" data-lang="nl">Dutch — Nederland</button>
-          <button class="lang-item notranslate" data-lang="et">Estonian — Eesti</button>
-          <button class="lang-item notranslate" data-lang="fi">Finnish — Suomi</button>
-          <button class="lang-item notranslate" data-lang="fr">French — France</button>
-          <button class="lang-item notranslate" data-lang="gl">Galician — Galicia</button>
-          <button class="lang-item notranslate" data-lang="ka">Georgian — საქართველო</button>
-          <button class="lang-item notranslate" data-lang="de">German — Deutschland</button>
-          <button class="lang-item notranslate" data-lang="el">Greek — Ελλάδα</button>
-          <button class="lang-item notranslate" data-lang="iw">Hebrew — ישראל</button>
-          <button class="lang-item notranslate" data-lang="hi">Hindi — भारत</button>
-          <button class="lang-item notranslate" data-lang="hu">Hungarian — Magyarország</button>
-          <button class="lang-item notranslate" data-lang="is">Icelandic — Ísland</button>
-          <button class="lang-item notranslate" data-lang="it">Italian — Italia</button>
-          <button class="lang-item notranslate" data-lang="ja">Japanese — 日本</button>
-          <button class="lang-item notranslate" data-lang="ko">Korean — 대한민국</button>
-          <button class="lang-item notranslate" data-lang="lv">Latvian — Latvija</button>
-          <button class="lang-item notranslate" data-lang="mk">Macedonian — Македонија</button>
-          <button class="lang-item notranslate" data-lang="ms">Malay — Malaysia</button>
-          <button class="lang-item notranslate" data-lang="fa">Persian — ایران</button>
-          <button class="lang-item notranslate" data-lang="pl">Polish — Polska</button>
-          <button class="lang-item notranslate" data-lang="pt">Portuguese — Portugal</button>
-          <button class="lang-item notranslate" data-lang="ro">Romanian — România</button>
-          <button class="lang-item notranslate" data-lang="ru">Russian — Россия</button>
-          <button class="lang-item notranslate" data-lang="sk">Slovak — Slovensko</button>
-          <button class="lang-item notranslate" data-lang="en">English — England</button>
-          <button class="lang-item notranslate" data-lang="tr">Türkçe — Türkiye</button>
+          <button class="lang-item notranslate" data-lang="af">Afrikaans â€” Suid-Afrika</button>
+          <button class="lang-item notranslate" data-lang="sq">Albanian â€” ShqipÃ«ri</button>
+          <button class="lang-item notranslate" data-lang="ar">Arabic â€” Ù…ØµØ±</button>
+          <button class="lang-item notranslate" data-lang="az">AzÉ™rbaycan dili â€” AzÉ™rbaycan</button>
+          <button class="lang-item notranslate" data-lang="eu">Basque â€” Euskal Herria</button>
+          <button class="lang-item notranslate" data-lang="bn">Bengali â€” à¦¬à¦¾à¦‚à¦²à¦¾à¦¦à§‡à¦¶</button>
+          <button class="lang-item notranslate" data-lang="bg">Bulgarian â€” Ð‘ÑŠÐ»Ð³Ð°Ñ€Ð¸Ñ?</button>
+          <button class="lang-item notranslate" data-lang="ca">Catalan â€” Catalunya</button>
+          <button class="lang-item notranslate" data-lang="zh-CN">Chinese â€” ä¸­å›½</button>
+          <button class="lang-item notranslate" data-lang="hr">Croatian â€” Hrvatska</button>
+          <button class="lang-item notranslate" data-lang="cs">Czech â€” ÄŒeskÃ¡ republika</button>
+          <button class="lang-item notranslate" data-lang="da">Danish â€” Danmark</button>
+          <button class="lang-item notranslate" data-lang="nl">Dutch â€” Nederland</button>
+          <button class="lang-item notranslate" data-lang="et">Estonian â€” Eesti</button>
+          <button class="lang-item notranslate" data-lang="fi">Finnish â€” Suomi</button>
+          <button class="lang-item notranslate" data-lang="fr">French â€” France</button>
+          <button class="lang-item notranslate" data-lang="gl">Galician â€” Galicia</button>
+          <button class="lang-item notranslate" data-lang="ka">Georgian â€” áƒ¡áƒ?áƒ¥áƒ?áƒ áƒ—áƒ•áƒ”áƒšáƒ?</button>
+          <button class="lang-item notranslate" data-lang="de">German â€” Deutschland</button>
+          <button class="lang-item notranslate" data-lang="el">Greek â€” Î•Î»Î»Î¬Î´Î±</button>
+          <button class="lang-item notranslate" data-lang="iw">Hebrew â€” ×™×©×¨×?×œ</button>
+          <button class="lang-item notranslate" data-lang="hi">Hindi â€” à¤­à¤¾à¤°à¤¤</button>
+          <button class="lang-item notranslate" data-lang="hu">Hungarian â€” MagyarorszÃ¡g</button>
+          <button class="lang-item notranslate" data-lang="is">Icelandic â€” Ã?sland</button>
+          <button class="lang-item notranslate" data-lang="it">Italian â€” Italia</button>
+          <button class="lang-item notranslate" data-lang="ja">Japanese â€” æ—¥æœ¬</button>
+          <button class="lang-item notranslate" data-lang="ko">Korean â€” ëŒ€í•œë¯¼êµ­</button>
+          <button class="lang-item notranslate" data-lang="lv">Latvian â€” Latvija</button>
+          <button class="lang-item notranslate" data-lang="mk">Macedonian â€” ÐœÐ°ÐºÐµÐ´Ð¾Ð½Ð¸Ñ˜Ð°</button>
+          <button class="lang-item notranslate" data-lang="ms">Malay â€” Malaysia</button>
+          <button class="lang-item notranslate" data-lang="fa">Persian â€” Ø§ÛŒØ±Ø§Ù†</button>
+          <button class="lang-item notranslate" data-lang="pl">Polish â€” Polska</button>
+          <button class="lang-item notranslate" data-lang="pt">Portuguese â€” Portugal</button>
+          <button class="lang-item notranslate" data-lang="ro">Romanian â€” RomÃ¢nia</button>
+          <button class="lang-item notranslate" data-lang="ru">Russian â€” Ð Ð¾Ñ?Ñ?Ð¸Ñ?</button>
+          <button class="lang-item notranslate" data-lang="sk">Slovak â€” Slovensko</button>
+          <button class="lang-item notranslate" data-lang="en">English â€” England</button>
+          <button class="lang-item notranslate" data-lang="tr">TÃ¼rkÃ§e â€” TÃ¼rkiye</button>
         </div>
       </div>
     </div>
@@ -174,7 +174,7 @@ $ASSET = BASEURL . 'assets/public/img/';
     <section class="form-section">
       <img src="<?= $ASSET ?>stars.png" alt="Stars">
       <p style="font-size: 32px; font-weight: 600;">More Than Just a Booking System</p>
-      <p style="font-size: 12px; font-weight: 500;">Halalholidaycheck is not only a reservation system; with its digital infrastructure, multi-service management, and <br>user experience–focused approach, it is a tourism technologies platform that connects business partners and <br>end-users in the travel industry.</p>
+      <p style="font-size: 12px; font-weight: 500;">Halalholidaycheck is not only a reservation system; with its digital infrastructure, multi-service management, and <br>user experienceâ€“focused approach, it is a tourism technologies platform that connects business partners and <br>end-users in the travel industry.</p>
     </section>
 
     <!-- CTA -->
@@ -228,10 +228,10 @@ $ASSET = BASEURL . 'assets/public/img/';
 
     <!-- FOOTER -->
     <footer class="footer">
-      <p>© 2025 HalalHolidayCheck. All rights reserved.</p>
+      <p>Â© 2025 HalalHolidayCheck. All rights reserved.</p>
       <div class="footer-right">
-        <div class="footer-lang"><span>🇬🇧</span> En</div>
-        <div class="footer-currency"><span>💱</span> USD</div>
+        <div class="footer-lang"><span>ðŸ‡¬ðŸ‡§</span> En</div>
+        <div class="footer-currency"><span>ðŸ’±</span> USD</div>
         <div class="footer-social">
           <a href="https://www.instagram.com/halalholidaycheck/?igsh=MWhzaDE3Z3JseHlqbg%3D%3D#"><i class="fa-brands fa-instagram"></i></a>
           <a href="https://www.facebook.com/share/16vHEvEckk/?mibextid=wwXIfr"><i class="fa-brands fa-facebook-f"></i></a>
@@ -239,6 +239,31 @@ $ASSET = BASEURL . 'assets/public/img/';
       </div>
     </footer>
   </div>
+<div id="contact-success-modal" class="hhc-modal"
+     aria-hidden="<?= $show_contact_modal ? 'false' : 'true' ?>">
+  <div class="hhc-backdrop" data-close></div>
+
+  <div class="hhc-dialog" role="dialog" aria-modal="true" aria-labelledby="hhc-success-title">
+    <img class="hhc-confetti" src="<?= $ASSET ?>confetti.png" alt="Success">
+
+    <h3 id="hhc-success-title" class="hhc-title">
+      <?= $contact_success
+            ? 'You Have Been Successfully Submitted!'
+            : 'We couldn’t send your message' ?>
+    </h3>
+
+    <p class="hhc-subtitle">
+      <?= $contact_success
+            ? 'Your details were sent successfully. A confirmation has been emailed to you.'
+            : 'Please try again in a moment or contact us via WhatsApp/email.' ?>
+    </p>
+
+    <button type="button" class="hhc-cta-btn" data-close>
+      <span><?= $contact_success ? 'Write new one' : 'Close' ?></span> <span aria-hidden="true">&rarr;</span>
+    </button>
+  </div>
+</div>
+  <!-- External JS (all your inline scripts moved here, GTM left inline) -->
   <script defer src="<?= BASEURL ?>assets/public/js/main.js"></script>
 </body>
 </html>

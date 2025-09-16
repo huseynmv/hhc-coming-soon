@@ -120,7 +120,7 @@ section.hero { position: relative; width: 100%; height: 661px; overflow: hidden;
 
 .send-wrap { display:flex; justify-content:flex-end; margin-top:16px; }
 .cta-btn{
-  display:inline-flex; align-items:center; gap:8px; border:none; border-radius:12px; background:#FFBF3F; color:#222;
+  display:inline-flex; align-items:center; gap:8px; border:none; border-radius:12px; background:#FFBF3F; color:#fff;
   font-weight:700; font-family:'Montserrat', sans-serif; padding:12px 20px; cursor:pointer; transition: transform .08s ease, filter .2s ease;
 }
 .cta-btn:hover{ filter: brightness(0.96); }
@@ -264,3 +264,87 @@ body{ top:0 !important; }
 #google_translate_element, .goog-te-banner-frame, .goog-te-gadget{ display:none !important; visibility:hidden !important; height:0 !important; overflow:hidden !important; }
 [class^="VIpgJd-"], [class*=" VIpgJd-"] { background:none !important; box-shadow:none !important; color:inherit !important; font:inherit !important; border:none !important; text-decoration:none !important; }
 [class^="VIpgJd-"]:hover, [class*=" VIpgJd-"]:hover { background:none !important; box-shadow:none !important; }
+/* ====== Contact Success Modal ====== */
+.hhc-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 10000;
+}
+.hhc-modal[aria-hidden="false"] { display: block; }
+
+.hhc-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  backdrop-filter: saturate(120%) blur(2px);
+}
+
+.hhc-dialog {
+  position: relative;
+  /* 100% width with 70px padding on each side = content never touches edges */
+  width: calc(100% - 140px);
+  margin: 0 auto;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1D4B4A;
+  border-radius: 16px;
+  padding: 70px;
+  box-sizing: border-box;
+  text-align: center;
+  color: #fff;
+}
+
+/* Confetti image at the top */
+.hhc-confetti {
+  display: block;
+  margin: 0 auto 16px;
+  max-width: 160px; /* tweak as you wish */
+  height: auto;
+}
+
+/* Typography as requested */
+.hhc-title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 147%;
+  font-family: 'Onest', sans-serif;
+  color: #fff;
+  margin: 8px 0 6px;
+}
+
+.hhc-subtitle {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 147%;
+  font-family: 'Onest', sans-serif;
+  color: #fff;
+  opacity: 0.95;
+  margin: 0 0 20px 0;
+}
+
+/* Button: bg #E8B040, 12px radius, text 600/14/147%/#fff */
+.hhc-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: #E8B040;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 147%;
+  font-family: 'Onest', sans-serif;
+  transition: filter .15s ease, transform .05s ease;
+}
+.hhc-cta-btn:hover { filter: brightness(0.96); }
+.hhc-cta-btn:active { transform: translateY(1px); }
+
+/* Small screens still keep 70px side padding relative to viewport width */
+@media (max-width: 520px){
+  .hhc-dialog { width: calc(100% - 40px); padding: 40px 20px; }
+  .hhc-confetti { max-width: 120px; }
+}
