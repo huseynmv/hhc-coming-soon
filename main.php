@@ -1,4 +1,5 @@
 <?php
+define('BASEURL', 'https://halalholidaycheck.com/');
 require __DIR__ . '/includes/bootstrap.php';   // session + output buffering
 require __DIR__ . '/includes/handlers.php';    // handles POST (notify/contact), redirects, flashes
 
@@ -34,6 +35,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <!-- External CSS (moved all <style> blocks here) -->
   <link rel="stylesheet" href="<?= BASEURL ?>assets/public/css/main.css">
+
+
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -48,7 +51,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <?php unset($_SESSION['flash_sent']); ?>
   <?php endif; ?>
 
-  <div class="container">
+  <div class="container"> 
     <!-- HERO -->
     <section class="hero">
       <img src="<?= $ASSET ?>hero.jpg" class="hero_img" alt="">
@@ -69,13 +72,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
 
-      <div class="hero_content">
+      <div class="hero_content" style="">
         <img src="<?= $ASSET ?>logo(1).png" alt="Logo">
-        <h1 style="font-size: 80px; font-weight: 600; line-height: 129%;">Weâ€™re Coming Soon</h1>
-        <p style="font-weight: 500; font-size: 12px; margin-top: 16px; line-height: 147%;">We're working hard
-          behind the scenes to bring you a new experience. Stay tuned and <br>be the first to explore whatâ€™s next!</p>
+        <h1 class="hero-title">HalalHolidayCheck &#8212 Global Booking Platform for Hotels, Tours, Transfers, Cars, Stays & Medical Travel</h1>
 
-        
+        <p style="font-weight: 500; font-size: 14px; line-height: 147%;">Hotels, tour operators, rent-a-car companies, property owners, and medical providers  &#8212 all in one place.
+Add your business and reach millions of users.&#127775 HalalHolidayCheck  &#8212 Coming Soon!</p>
+
+
 
         <?php if (!empty($_SESSION['flash_notify'])): ?>
           <div id="flash-notify"
@@ -93,11 +97,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 
-        <div class="contact-options">
+        <!-- <div class="contact-options">
           <a href="tel:4441075" class="call-btn">Call us</a>
           <a href="https://wa.me/905395988066?text=Hello%20I%20need%20help" target="_blank" class="whatsapp-btn">Write to WhatsApp</a>
           <a href="mailto:info@halalholidaycheck.com?subject=Support%20Request&body=Hello%2C%20I%20need%20help" class="mail-btn">Contact with mail</a>
-        </div>
+        </div> -->
       </div>
     </section>
 
@@ -108,48 +112,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div id="lang-modal" class="lang-modal" aria-hidden="true">
       <div class="lang-backdrop" data-close></div>
       <div class="lang-dialog" role="dialog" aria-modal="true" aria-labelledby="lang-title">
-        <button class="lang-close" type="button" data-close aria-label="Close">Ã—</button>
+        <button class="lang-close" type="button" data-close aria-label="Close">X</button>
         <h3 id="lang-title">Choose your language</h3>
 
         <div class="lang-grid">
-          <button class="lang-item notranslate" data-lang="af">Afrikaans â€” Suid-Afrika</button>
-          <button class="lang-item notranslate" data-lang="sq">Albanian â€” ShqipÃ«ri</button>
-          <button class="lang-item notranslate" data-lang="ar">Arabic â€” Ù…ØµØ±</button>
-          <button class="lang-item notranslate" data-lang="az">AzÉ™rbaycan dili â€” AzÉ™rbaycan</button>
-          <button class="lang-item notranslate" data-lang="eu">Basque â€” Euskal Herria</button>
-          <button class="lang-item notranslate" data-lang="bn">Bengali â€” à¦¬à¦¾à¦‚à¦²à¦¾à¦¦à§‡à¦¶</button>
-          <button class="lang-item notranslate" data-lang="bg">Bulgarian â€” Ð‘ÑŠÐ»Ð³Ð°Ñ€Ð¸Ñ?</button>
-          <button class="lang-item notranslate" data-lang="ca">Catalan â€” Catalunya</button>
-          <button class="lang-item notranslate" data-lang="zh-CN">Chinese â€” ä¸­å›½</button>
-          <button class="lang-item notranslate" data-lang="hr">Croatian â€” Hrvatska</button>
-          <button class="lang-item notranslate" data-lang="cs">Czech â€” ÄŒeskÃ¡ republika</button>
-          <button class="lang-item notranslate" data-lang="da">Danish â€” Danmark</button>
-          <button class="lang-item notranslate" data-lang="nl">Dutch â€” Nederland</button>
-          <button class="lang-item notranslate" data-lang="et">Estonian â€” Eesti</button>
-          <button class="lang-item notranslate" data-lang="fi">Finnish â€” Suomi</button>
-          <button class="lang-item notranslate" data-lang="fr">French â€” France</button>
-          <button class="lang-item notranslate" data-lang="gl">Galician â€” Galicia</button>
-          <button class="lang-item notranslate" data-lang="ka">Georgian â€” áƒ¡áƒ?áƒ¥áƒ?áƒ áƒ—áƒ•áƒ”áƒšáƒ?</button>
-          <button class="lang-item notranslate" data-lang="de">German â€” Deutschland</button>
-          <button class="lang-item notranslate" data-lang="el">Greek â€” Î•Î»Î»Î¬Î´Î±</button>
-          <button class="lang-item notranslate" data-lang="iw">Hebrew â€” ×™×©×¨×?×œ</button>
-          <button class="lang-item notranslate" data-lang="hi">Hindi â€” à¤­à¤¾à¤°à¤¤</button>
-          <button class="lang-item notranslate" data-lang="hu">Hungarian â€” MagyarorszÃ¡g</button>
-          <button class="lang-item notranslate" data-lang="is">Icelandic â€” Ã?sland</button>
-          <button class="lang-item notranslate" data-lang="it">Italian â€” Italia</button>
-          <button class="lang-item notranslate" data-lang="ja">Japanese â€” æ—¥æœ¬</button>
-          <button class="lang-item notranslate" data-lang="ko">Korean â€” ëŒ€í•œë¯¼êµ­</button>
-          <button class="lang-item notranslate" data-lang="lv">Latvian â€” Latvija</button>
-          <button class="lang-item notranslate" data-lang="mk">Macedonian â€” ÐœÐ°ÐºÐµÐ´Ð¾Ð½Ð¸Ñ˜Ð°</button>
-          <button class="lang-item notranslate" data-lang="ms">Malay â€” Malaysia</button>
-          <button class="lang-item notranslate" data-lang="fa">Persian â€” Ø§ÛŒØ±Ø§Ù†</button>
-          <button class="lang-item notranslate" data-lang="pl">Polish â€” Polska</button>
-          <button class="lang-item notranslate" data-lang="pt">Portuguese â€” Portugal</button>
-          <button class="lang-item notranslate" data-lang="ro">Romanian â€” RomÃ¢nia</button>
-          <button class="lang-item notranslate" data-lang="ru">Russian â€” Ð Ð¾Ñ?Ñ?Ð¸Ñ?</button>
-          <button class="lang-item notranslate" data-lang="sk">Slovak â€” Slovensko</button>
-          <button class="lang-item notranslate" data-lang="en">English â€” England</button>
-          <button class="lang-item notranslate" data-lang="tr">TÃ¼rkÃ§e â€” TÃ¼rkiye</button>
+          <button class="lang-item notranslate" data-lang="af">Afrikaans — 🇿🇦 Suid-Afrika</button>
+<button class="lang-item notranslate" data-lang="sq">Albanian — 🇦🇱 Shqipëri</button>
+<button class="lang-item notranslate" data-lang="ar">Arabic — 🇸🇦 مصر</button>
+<button class="lang-item notranslate" data-lang="az">Azərbaycan dili — 🇦🇿 Azərbaycan</button>
+<button class="lang-item notranslate" data-lang="eu">Basque — 🇪🇸 Euskal Herria</button>
+<button class="lang-item notranslate" data-lang="bn">Bengali — 🇧🇩 বাংলাদেশ</button>
+<button class="lang-item notranslate" data-lang="bg">Bulgarian — 🇧🇬 България</button>
+<button class="lang-item notranslate" data-lang="ca">Catalan — 🇪🇸 Catalunya</button>
+<button class="lang-item notranslate" data-lang="zh-CN">Chinese — 🇨🇳 中国</button>
+<button class="lang-item notranslate" data-lang="hr">Croatian — 🇭🇷 Hrvatska</button>
+<button class="lang-item notranslate" data-lang="cs">Czech — 🇨🇿 Česká republika</button>
+<button class="lang-item notranslate" data-lang="da">Danish — 🇩🇰 Danmark</button>
+<button class="lang-item notranslate" data-lang="nl">Dutch — 🇳🇱 Nederland</button>
+<button class="lang-item notranslate" data-lang="et">Estonian — 🇪🇪 Eesti</button>
+<button class="lang-item notranslate" data-lang="fi">Finnish — 🇫🇮 Suomi</button>
+<button class="lang-item notranslate" data-lang="fr">French — 🇫🇷 France</button>
+<button class="lang-item notranslate" data-lang="gl">Galician — 🇪🇸 Galicia</button>
+<button class="lang-item notranslate" data-lang="ka">Georgian — 🇬🇪 საქართველო</button>
+<button class="lang-item notranslate" data-lang="de">German — 🇩🇪 Deutschland</button>
+<button class="lang-item notranslate" data-lang="el">Greek — 🇬🇷 Ελλάδα</button>
+<button class="lang-item notranslate" data-lang="iw">Hebrew — 🇮🇱 ישראל</button>
+<button class="lang-item notranslate" data-lang="hi">Hindi — 🇮🇳 भारत</button>
+<button class="lang-item notranslate" data-lang="hu">Hungarian — 🇭🇺 Magyarország</button>
+<button class="lang-item notranslate" data-lang="is">Icelandic — 🇮🇸 Ísland</button>
+<button class="lang-item notranslate" data-lang="it">Italian — 🇮🇹 Italia</button>
+<button class="lang-item notranslate" data-lang="ja">Japanese — 🇯🇵 日本</button>
+<button class="lang-item notranslate" data-lang="ko">Korean — 🇰🇷 한국</button>
+<button class="lang-item notranslate" data-lang="lv">Latvian — 🇱🇻 Latvija</button>
+<button class="lang-item notranslate" data-lang="mk">Macedonian — 🇲🇰 Македонија</button>
+<button class="lang-item notranslate" data-lang="ms">Malay — 🇲🇾 Malaysia</button>
+<button class="lang-item notranslate" data-lang="fa">Persian — 🇮🇷 ایران</button>
+<button class="lang-item notranslate" data-lang="pl">Polish — 🇵🇱 Polska</button>
+<button class="lang-item notranslate" data-lang="pt">Portuguese — 🇵🇹 Portugal</button>
+<button class="lang-item notranslate" data-lang="ro">Romanian — 🇷🇴 România</button>
+<button class="lang-item notranslate" data-lang="ru">Russian — 🇷🇺 Россия</button>
+<button class="lang-item notranslate" data-lang="sk">Slovak — 🇸🇰 Slovensko</button>
+<button class="lang-item notranslate" data-lang="en">English — 🇬🇧 England</button>
+<button class="lang-item notranslate" data-lang="tr">Türkçe — 🇹🇷 Türkiye</button>
+
         </div>
       </div>
     </div>
@@ -215,7 +220,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <input class="cta-phone" type="tel" name="phone" placeholder="1712812819">
             </div>
           </div>
-
+<div>
+  <div class="cta-label" style="margin-top: 4px;">Message</div>
+  <textarea
+    class="cta-textarea cta-input"
+    name="message"
+    rows="3"
+    placeholder="Write a short message (optional)"></textarea>
+</div>
           <div class="send-wrap">
             <button class="cta-btn" type="submit">
               Send message
@@ -228,15 +240,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- FOOTER -->
     <footer class="footer">
-      <p>Â© 2025 HalalHolidayCheck. All rights reserved.</p>
+      <p>© 2025 HalalHolidayCheck. All rights reserved.</p>
       <div class="footer-right">
-        <div class="footer-lang"><span>ðŸ‡¬ðŸ‡§</span> En</div>
-        <div class="footer-currency"><span>ðŸ’±</span> USD</div>
+        <div class="footer-lang"><span></span> En</div>
+        <div class="footer-currency"><span></span> USD</div>
         <div class="footer-social">
           <a href="https://www.instagram.com/halalholidaycheck/?igsh=MWhzaDE3Z3JseHlqbg%3D%3D#"><i class="fa-brands fa-instagram"></i></a>
           <a href="https://www.facebook.com/share/16vHEvEckk/?mibextid=wwXIfr"><i class="fa-brands fa-facebook-f"></i></a>
         </div>
       </div>
+      <div class="footer-phone">
+  📞 <a style="text-decoration: none; color:inherit" href="tel:+4915734068958">+4915734068958</a>
+</div>
     </footer>
   </div>
 <div id="contact-success-modal" class="hhc-modal"
