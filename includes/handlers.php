@@ -48,25 +48,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['form_id'] ?? '') === 'noti
 }
 
 // --- Contact CTA submit ---
+require __DIR__ . '/../vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// --- Contact CTA submit ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['form_id'] ?? '') === 'contact_cta') {
     $to = 'info@halalholidaycheck.com';
 
     $email = filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL);
     $name  = trim($_POST['name'] ?? '');
     $phone = trim(($_POST['country_code'] ?? '') . ' ' . ($_POST['phone'] ?? ''));
+    $message = trim($_POST['message'] ?? '');
 
     $subject = 'New Contact Form Submission - HalalHolidayCheck';
     $message = "You received a new message from the Contact CTA form:\n\n"
              . "Name: $name\n"
              . "Email: $email\n"
-             . "Phone: $phone\n";
+             . "Phone: $phone\n"
+             - "Message: $message\n";
 
-    $domain  = $_SERVER['SERVER_NAME'] ?? 'yourdomain.com';
-    $headers = "From: noreply@$domain\r\n";
-    if ($email) { $headers .= "Reply-To: $email\r\n"; }
+    try {
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';      
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'contact@halalholidaycheck.com';
+        $mail->Password   = 'your_email_password';      
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;                          // or 465 if using SSL
 
-    $ok = @mail($to, $subject, $message, $headers);
-    $_SESSION['flash_sent'] = $ok ? 'ok' : 'fail';
+        $mail->setFrom('contact@halalholidaycheck.com', 'HalalHolidayCheck');
+        $mail->addAddress('info@halalholidaycheck.com');
+
+        if ($email) {
+            $mail->addReplyTo($email);
+        }
+
+        $mail->Subject = $subject;
+        $mail->Body    = $message;
+
+        $mail->send();
+        $_SESSION['flash_sent'] = 'ok';
+    } catch (Exception $e) {
+        $_SESSION['flash_sent'] = 'fail';
+    }
+
     header('Location: ' . strtok($_SERVER['REQUEST_URI'], '?'));
     exit;
 }
